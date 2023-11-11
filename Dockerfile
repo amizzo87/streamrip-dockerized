@@ -1,20 +1,21 @@
-# Use an official Python runtime as a parent image
 FROM python:3.9-slim-buster
 
-# Set the working directory in the container to /app
 WORKDIR /app
 
-# Add the current directory contents into the container at /app
-ADD . /app
+# Install Poetry
+RUN pip install poetry
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy only requirements to cache them in docker layer
+COPY pyproject.toml poetry.lock* /app/
 
-# Define environment variable
-# ENV NAME foobar
+# Project initialization:
+RUN poetry config virtualenvs.create false \
+  && poetry install --no-interaction --no-ansi
 
-# Run the command to start the app
-CMD ["python", "./rip/__main__.py"]
+# Copying in our source code
+COPY . /app
+
+CMD [ "python3", "-m" , "streamrip", "--config", "/config/config.yml"]
 
 # Volume for downloads
 VOLUME /downloads
