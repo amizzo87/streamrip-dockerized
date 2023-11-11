@@ -1,6 +1,6 @@
 [downloads]
 # Folder where tracks are downloaded to
-folder = ""
+folder = "/downloads/"
 # Put Qobuz albums in a 'Qobuz' folder, Tidal albums in 'Tidal' etc.
 source_subdirectories = false
 
@@ -16,7 +16,7 @@ max_connections = 3
 
 [qobuz]
 # 1: 320kbps MP3, 2: 16/44.1, 3: 24/<=96, 4: 24/>=96
-quality = 3
+quality = 4
 # This will download booklet pdfs that are included with some albums
 download_booklets = true
 
@@ -78,13 +78,13 @@ video_downloads_folder = ""
 # This stores a list of item IDs so that repeats are not downloaded.
 [database.downloads]
 enabled = true
-path = ""
+path = "/db/completed_downloads.db"
 
 # If a download fails, the item ID is stored here. Then, `rip repair` can be
 # called to retry the downloads
 [database.failed_downloads]
 enabled = true
-path = ""
+path = "/db/failed_downloads.db"
 
 # Convert tracks to a codec after downloading them.
 [conversion]
@@ -93,7 +93,7 @@ enabled = false
 codec = "ALAC"
 # In Hz. Tracks are downsampled if their sampling rate is greater than this. 
 # Value of 48000 is recommended to maximize quality and minimize space
-sampling_rate = 48000
+sampling_rate = 96000
 # Only 16 and 24 are available. It is only applied when the bit depth is higher
 # than this value.
 bit_depth = 24
@@ -147,7 +147,7 @@ exclude = []
 add_singles_to_folder = false
 # Available keys: "albumartist", "title", "year", "bit_depth", "sampling_rate",
 # "container", "id", and "albumcomposer"
-folder_format = "{albumartist} - {title} ({year}) [{container}] [{bit_depth}B-{sampling_rate}kHz]"
+folder_format = "{albumartist}/{title}"
 # Available keys: "tracknumber", "artist", "albumartist", "composer", "title",
 # and "albumcomposer"
 track_format = "{tracknumber}. {artist} - {title}{explicit}"
@@ -155,7 +155,7 @@ track_format = "{tracknumber}. {artist} - {title}{explicit}"
 restrict_characters = false
 # Truncate the filename if it is greater than 120 characters
 # Setting this to false may cause downloads to fail on some systems
-truncate = true
+truncate = false
 
 
 # Last.fm playlists are downloaded by searching for the titles of the tracks
@@ -164,7 +164,7 @@ truncate = true
 source = "qobuz"
 # If no results were found with the primary source, the item is searched for 
 # on this one.
-fallback_source = "deezer"
+fallback_source = "tidal"
 
 [theme]
 # Options: "dainty" or "plain"
