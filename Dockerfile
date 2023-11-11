@@ -10,14 +10,17 @@ ADD . /app
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 80 available to the world outside this container
-# EXPOSE 80
-
 # Define environment variable
-# ENV NAME World
+# ENV NAME foobar
 
 # Run the command to start the app
 CMD ["python", "./rip/__main__.py"]
 
-# Define the volume
+# Volume for downloads
 VOLUME /downloads
+
+# Volume for streamrip db
+VOLUME /db
+
+# Volume for streamrip config
+# VOLUME /config
