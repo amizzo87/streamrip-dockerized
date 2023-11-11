@@ -16,7 +16,8 @@ RUN poetry install --no-interaction --no-ansi
 # Copying in our source code
 COPY . /app
 
-CMD [ "python3", "-m" , "streamrip", "--config", "/config/config.yml"]
+# CMD [ "python3", "-m" , "streamrip", "--config", "/config/config.yml"]
+CMD ["python", "./rip/__main__.py"]
 
 # Volume for downloads
 VOLUME /downloads
